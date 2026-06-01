@@ -6,7 +6,10 @@
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://yalter.github.io/niri/Configuration:-Input
-spawn-sh-at-startup "swaybg -m fill -i ~/Backgrounds/Green-Blackhole.jpg"
+
+// spawn-sh-at-startup "swaybg -m fill -i ~/Backgrounds/Green-Blackhole.jpg"
+spawn-sh-at-startup "~/Backgrounds/wallpaper"
+spawn-sh-at-startup "source ~/.zshrc"
 
 input {
     keyboard {
@@ -14,6 +17,7 @@ input {
             // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
             layout "us"
+            // layout "us(dvorak)"
             // options "caps: escape,escape: swapcaps"
             options "escape: caps,caps:swapescape"
 
@@ -50,9 +54,9 @@ input {
     mouse {
         // off
         // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "no-scroll"
+        accel-speed 0.0
+        accel-profile "flat"
+        scroll-method "no-scroll"
     }
 
     trackpoint {
@@ -179,7 +183,8 @@ layout {
         // Color of the ring on the active monitor.
         // active-color "rgba(0, 255, 255, 5)"
         // active-color "#bd93f9"
-        active-color "#9afcb3"
+        // active-color "#9afcb3"
+        active-color "#9ab3fc"
 
         // Color of the ring on inactive monitors.
         //
@@ -286,8 +291,17 @@ layout {
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 // spawn-sh-at-startup "swaybg -m fill -i ~/Backgrounds/Green-Blackhole.jpg"
-spawn-at-startup "ghostty"
+spawn-at-startup "~/Backgrounds/wallpaper"
+spawn-at-startup  "ghostty"
 spawn-sh-at-startup "fuzzel"
+// spawn-at-startup "ghostty -e ~/Documents/boo" //--- To auto start ghostty with "ghostty +boo"
+
+window-rule {
+    match app-id="^com.mitchellh.ghostty$"
+    background-effect {
+        blur true
+    }
+}
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -320,6 +334,10 @@ animations {
     // slowdown 3.0
 }
 
+environment {
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+}
+
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
@@ -339,7 +357,9 @@ window-rule {
     // This app-id regular expression will work for both:
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    match app-id=r#"zen$"# title="^Picture-in-Picture$"
+    match app-id=r#"librewolf$"# title="^Picture-in-Picture$"
+    match app-id=r#"vivaldi.*$"# title="^Picture-in-Picture$"
     open-floating true
 }
 
@@ -384,9 +404,12 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: Ghostty" { spawn "ghostty"; }
+    Super+Shift+T hotkey-overlay-title="Open a Terminal: Kitty" { spawn "kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Super+Alt+L hotkey-overlay-title="Open Power Menu: wlogout" { spawn "wlogout"; }
+    Super+Alt+L hotkey-overlay-title="Open Power Menu: wlogout" repeat=false { spawn "wlogout"; }
     Super+E hotkey-overlay-title="Open File Explorer: Dolphin" { spawn "dolphin"; }
+    Super+Shift+Z hotkey-overlay-title="Open Text Editor: Zed" { spawn "zeditor"; }
+    Super+Alt+E hotkey-overlay-title="Open Text Editor: Visual Studio Code" { spawn "code"; }
     Super+B hotkey-overlay-title="Open Web Browser: Zen Browser" { spawn "zen-browser"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -422,6 +445,11 @@ binds {
     Mod+O repeat=false { toggle-overview; }
 
     Mod+Q repeat=false { close-window; }
+
+    // Wooz -- Magnifying application
+    // Mod+Plus { spawn "wooz" "--zoom-in 10%"; }
+    // Mod+Ctrl+Minus { spawn "wooz" "--zoom-in 0.10%"; }
+    // Mod+Ctrl+0 { spawn "wooz" "--reset"; }
 
     Mod+Left  { focus-column-left; }
     Mod+Down  { focus-window-down; }
