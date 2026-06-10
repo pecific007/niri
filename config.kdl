@@ -19,7 +19,7 @@ input {
             layout "us"
             // layout "us(dvorak)"
             // options "caps: escape,escape: swapcaps"
-            options "escape: caps,caps:swapescape"
+            options "caps:swapescape, altwin:menu_win"
 
             // For example:
             // layout "us,ru"
