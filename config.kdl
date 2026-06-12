@@ -7,9 +7,10 @@
 // Find the full list of options on the wiki:
 // https://yalter.github.io/niri/Configuration:-Input
 
-// spawn-sh-at-startup "swaybg -m fill -i ~/Backgrounds/Green-Blackhole.jpg"
-spawn-sh-at-startup "~/Backgrounds/wallpaper"
-spawn-sh-at-startup "source ~/.zshrc"
+// spawn-sh-at-startup "swaybg -m fill -i ~/Backgrounds/Green-Blackhole.jpg" -- This doesn't work for some reasons
+
+// spawn-sh-at-startup "~/Backgrounds/wallpaper" -- There is no ./wallpaper at ~/Backgrounds/
+// spawn-sh-at-startup "source ~/.zshrc"  -- There is no .zshrc in $HOME
 
 input {
     keyboard {
@@ -291,10 +292,8 @@ layout {
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 // spawn-sh-at-startup "swaybg -m fill -i ~/Backgrounds/Green-Blackhole.jpg"
-spawn-at-startup "~/Backgrounds/wallpaper"
 spawn-at-startup  "ghostty"
 spawn-sh-at-startup "fuzzel"
-// spawn-at-startup "ghostty -e ~/Documents/boo" //--- To auto start ghostty with "ghostty +boo"
 
 window-rule {
     match app-id="^com.mitchellh.ghostty$"
@@ -411,6 +410,7 @@ binds {
     Super+Shift+Z hotkey-overlay-title="Open Text Editor: Zed" { spawn "zeditor"; }
     Super+Alt+E hotkey-overlay-title="Open Text Editor: Visual Studio Code" { spawn "code"; }
     Super+B hotkey-overlay-title="Open Web Browser: Zen Browser" { spawn "zen-browser"; }
+    Super+Shift+W hotkey-overlay-title="Start swaybg with earth background" { spawn-sh "~/wallpaper earth"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
